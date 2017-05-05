@@ -14,12 +14,23 @@ namespace AreaOfTriangle
             double[] A = new double[] { 0, 0, 6 };
             double[] B = new double[] { 0, 6, 0 };
             Program p = new Program();
-            double s = p.FindArea(A, B);
-            Console.WriteLine($"S={s}");
+            try
+            {
+                double S = p.FindArea(A, B);
+                Console.WriteLine($"S={S}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             Console.ReadLine();
         }
         public double FindArea(double[] x, double[] y)
         {
+            if (x.Length!=3 || y.Length!=3)
+            {
+                throw new ArgumentException($"Argument must contain coordinates of 3 points. Received x.Length= {x.Length}, y.Length= {y.Length}");
+            }
             double LengthA = FindLineLegth(x[0], x[1], y[0], y[1]);
             double LengthB = FindLineLegth(x[1], x[2], y[1], y[2]);
             double LengthC = FindLineLegth(x[2], x[0], y[2], y[0]);
