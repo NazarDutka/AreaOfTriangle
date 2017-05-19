@@ -45,7 +45,7 @@ namespace Lib
         {
             return Math.Sqrt(Math.Pow((x1 - x2), 2d) + Math.Pow((y1 - y2), 2d));           
         }
-        public double FindPolygonArea(double[] points)
+        public double FindPolygonArea(Point2D[] points)
         {
             if (points == null)
             {
@@ -54,23 +54,29 @@ namespace Lib
             //todo цікава задача зробити перевірку чи багатокутник правильний (опуклий)
             switch (points.Length)
             {
-                case 0://
-                    break;
+                case 0://думаю такого не буває. Провірити
+                    return 0;
                 case 1:
                 case 2:
+                    return 0;// or throw new ArgumentNullException();
                 case 3:
-
-                    break;
+                    return FindTiangleArea(points);
                 default:
-                    Console.WriteLine("somthing wrong");
-                    break;
+                    
+
+                    return 0;
+
             }
 
         }
 
         public double Area(double[] x, double[] y)
         {
-            throw new NotImplementedException();
+            if (x.Length != 3)
+            {
+                throw new ArgumentException($"Argument must contain equal number of coordinates. Received {X.Length} points");
+            }
+            return
         }
     }
 }
