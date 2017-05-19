@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lib
 {
-    interface ITask //bad name but whatever
+    public interface ITask //bad name but whatever
     {
         double Area(double[] x, double[] y);
     }
@@ -19,10 +19,15 @@ namespace Lib
     {
         static void Main(string[] args)
         {
-
-            double[] A = new double[] { 0, 0, 6 };
-            double[] B = new double[] { 0, 6, 0 };
-
+            Console.WriteLine();
+            double[] X = { 0, 0, 6 };
+            double[] Y = { 0, 6, 0 };
+            var geometry = new Geometry2D();
+            var r = geometry.Area(X, Y);
+            Console.WriteLine("r={0}",r:d);//як вивести дробну частину
+            Console.WriteLine("r.type: "+r.GetType());
+            var R = Math.Round(r);
+            Console.ReadLine();
         }
         public double FindTiangleArea(Point2D[] A)
         {
@@ -58,18 +63,18 @@ namespace Lib
                     return 0;
                 case 1:
                 case 2:
-                    return 0;// or throw new ArgumentNullException();
+                    return 0;// or throw new ArgumentException();
                 case 3:
                     return FindTiangleArea(points);
                 default:
                     double S=0;
-                    for (int i = 2; i < points.Length-1; i++)
+                    int l = points.Length - 1;
+                    for (int i = 2; i < l; i++)
                     {
                         S += FindTiangleArea(new Point2D[]{ points[0], points[i-1], points[i] });
                     }
-                    S += FindTiangleArea(new Point2D[] { points[0], points[points.Length - 1], points[points.Length] });
+                    S += FindTiangleArea(new Point2D[] { points[0], points[l-1], points[l] });
                     return S;
-
             }
 
         }
