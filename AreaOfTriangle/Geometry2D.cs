@@ -62,9 +62,13 @@ namespace Lib
                 case 3:
                     return FindTiangleArea(points);
                 default:
-                    
-
-                    return 0;
+                    double S=0;
+                    for (int i = 2; i < points.Length-1; i++)
+                    {
+                        S += FindTiangleArea(new Point2D[]{ points[0], points[i-1], points[i] });
+                    }
+                    S += FindTiangleArea(new Point2D[] { points[0], points[points.Length - 1], points[points.Length] });
+                    return S;
 
             }
 
@@ -72,11 +76,21 @@ namespace Lib
 
         public double Area(double[] x, double[] y)
         {
-            if (x.Length != 3)
+            if (x == null && y == null)
             {
-                throw new ArgumentException($"Argument must contain equal number of coordinates. Received {X.Length} points");
+                throw new ArgumentNullException();
             }
-            return
+            if (x.Length != y.Length)
+            {
+                throw new ArgumentException($"Argument must contain equal number of coordinates. Received x.Length= {x.Length}, y.Length= {y.Length}");
+            }
+            Point2D[] points = new Point2D[x.Length];
+            for (int i = 0; i < x.Length; i++)
+            {
+                points[i].X = x[i];
+                points[i].Y = y[i];
+            }
+            return FindPolygonArea(points);
         }
     }
 }
