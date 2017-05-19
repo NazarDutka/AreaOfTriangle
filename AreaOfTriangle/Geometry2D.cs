@@ -43,16 +43,23 @@ namespace Lib
         }
         public double FindPolygonArea(double[] x, double[] y)
         {
-            if (x == null && y == null)
+            if (points == null)
             {
                 throw new ArgumentNullException();
             }
-
-            //todo etc.
-
-            switch (switch_on)
+            //todo цікава задача зробити перевірку чи багатокутник правильний (опуклий)
+            switch (points.Length)
             {
+                case 0://
+                    break;
+                case 1:
+                case 2:
+                case 3:
+
+                    break;
                 default:
+                    Console.WriteLine("somthing wrong");
+                    break;
             }
 
         }
